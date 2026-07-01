@@ -57,7 +57,7 @@ export function Navbar({ solid = false }: NavbarProps) {
         <div className="flex items-center justify-between h-16 sm:h-20">
           <Link href="/" className="flex items-center gap-2 group">
             <Image
-              src="/images/logo.png"
+              src="/images/logo1.png"
               alt="Kenova Learning"
               width={300}
               height={70}

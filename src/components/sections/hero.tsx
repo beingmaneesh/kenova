@@ -49,7 +49,10 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden pt-20"
+      className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-cover" style={{
+                  backgroundImage:
+                    "linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0)), url('/images/contact.jpg')",
+                }}
     >
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/60 via-white to-indigo-50/30" />
       <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-blue-100/20 rounded-full blur-3xl" />
