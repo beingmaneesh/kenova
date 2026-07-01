@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "kenova-dev",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "npx next dev --port 3001"],
+      "port": 3001
+    }
+  ]
+}
