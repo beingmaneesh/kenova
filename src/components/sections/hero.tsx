@@ -148,10 +148,10 @@ export function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-br from-orange-100 to-blue-100 rounded-[2rem] rotate-3" />
               <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-white rounded-[2rem] -rotate-1 shadow-xl" />
               <div
-                className="relative bg-white rounded-[2rem] p-8 shadow-lg h-full flex flex-col items-center justify-center bg-cover"
+                className="relative bg-gradient-to-br from-[#2563EB] to-[#1E3A8A] rounded-[2rem] p-8 shadow-lg h-full flex flex-col items-center justify-center bg-cover"
                 style={{
                   backgroundImage:
-                    "linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0)), url('/images/hero.jpg')",
+                    "linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0)), url('/images/hero-img.jpg')",
                 }}
               >
                 <div className="w-70 h-40 flex items-center justify-center mb-6">
