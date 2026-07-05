@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useTransition, type FormEvent } from "react";
 import { motion } from "framer-motion";
+import { submitEnquiry } from "@/app/actions/enquiry";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { BreadcrumbHero } from "@/components/breadcrumb-hero";
@@ -23,38 +24,38 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Visit Us",
-    lines: ["Kenova Learning Centre", "Kerala, India"],
+    lines: ["Kenova Learning Centre", "second floor , Naduthodiyil building ,Pattambi road Edappal, Malappuram 679576"],
     color: "text-[#F97316]",
     bg: "bg-orange-50",
   },
   {
     icon: Phone,
     title: "Call Us",
-    lines: ["+91 98765 43210", "+91 98765 43211"],
-    href: "tel:+919876543210",
+    lines: ["+91 9100100983"],
+    href: "tel:+919100100983",
     color: "text-[#2563EB]",
     bg: "bg-blue-50",
   },
   {
     icon: Mail,
     title: "Email Us",
-    lines: ["info@kenovalearning.com", "admissions@kenovalearning.com"],
-    href: "mailto:info@kenovalearning.com",
+    lines: ["study@kenovalearning.com"],
+    href: "mailto:study@kenovalearning.com",
     color: "text-[#EA580C]",
     bg: "bg-orange-50",
   },
   {
     icon: MessageCircle,
     title: "WhatsApp",
-    lines: ["+91 98765 43210", "Quick replies guaranteed"],
-    href: "https://wa.me/919876543210",
+    lines: ["+91 9100100983", "Quick replies guaranteed"],
+    href: "https://wa.me/919100100983",
     color: "text-[#10B981]",
     bg: "bg-emerald-50",
   },
   {
     icon: Clock,
     title: "Office Hours",
-    lines: ["Mon – Sat: 5:30 AM – 10:00 PM", "Sunday: Closed"],
+    lines: ["Mon – Sat: 09:00 AM – 06:00 PM", "Sunday: Closed"],
     color: "text-[#1E3A8A]",
     bg: "bg-indigo-50",
   },
@@ -69,6 +70,8 @@ const contactInfo = [
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [isPending, startTransition] = useTransition();
   const [formData, setFormData] = useState({
     parentName: "",
     phone: "",
@@ -81,16 +84,24 @@ export default function ContactPage() {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
-    setFormData({
-      parentName: "",
-      phone: "",
-      email: "",
-      studentName: "",
-      class: "",
-      syllabus: "",
-      message: "",
+    setError("");
+    startTransition(async () => {
+      const result = await submitEnquiry(formData);
+      if (result.success) {
+        setSubmitted(true);
+        setFormData({
+          parentName: "",
+          phone: "",
+          email: "",
+          studentName: "",
+          class: "",
+          syllabus: "",
+          message: "",
+        });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setError(result.error || "Something went wrong. Please try again.");
+      }
     });
   }
 
@@ -336,12 +347,28 @@ export default function ContactPage() {
                   />
                 </div>
 
+                {error && (
+                  <div className="p-4 rounded-xl bg-red-50 border border-red-200">
+                    <p className="text-sm font-medium text-red-700">{error}</p>
+                  </div>
+                )}
+
                 <Button
                   type="submit"
-                  className="w-full sm:w-auto bg-gradient-to-r from-[#F97316] to-[#EA580C] hover:from-[#EA580C] hover:to-[#DC2626] text-white rounded-xl h-12 px-8 text-sm font-semibold shadow-md shadow-orange-200 hover:shadow-lg hover:shadow-orange-300 transition-all"
+                  disabled={isPending}
+                  className="w-full sm:w-auto bg-gradient-to-r from-[#F97316] to-[#EA580C] hover:from-[#EA580C] hover:to-[#DC2626] text-white rounded-xl h-12 px-8 text-sm font-semibold shadow-md shadow-orange-200 hover:shadow-lg hover:shadow-orange-300 transition-all disabled:opacity-60"
                 >
-                  <Send className="w-4 h-4 mr-2" />
-                  Submit Enquiry
+                  {isPending ? (
+                    <>
+                      <span className="w-4 h-4 mr-2 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 mr-2" />
+                      Submit Enquiry
+                    </>
+                  )}
                 </Button>
               </form>
             </motion.div>
@@ -369,7 +396,7 @@ export default function ContactPage() {
 
               <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125744.29091190524!2d76.2!3d10.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080d514abec6bf%3A0xbd582caa5f3f59b!2sKerala!5e0!3m2!1sen!2sin!4v1680000000000!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d15677.621427984453!2d76.00427628111007!3d10.780233459796209!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sNaduthodiyil%20building%20Pattambi%20road%20Edappal%20Malappuram%20679576!5e0!3m2!1sen!2sin!4v1783257579236!5m2!1sen!2sin"
                   width="100%"
                   height="350"
                   style={{ border: 0 }}
@@ -390,10 +417,10 @@ export default function ContactPage() {
                     Call for Enquiry
                   </p>
                   <a
-                    href="tel:+919876543210"
+                    href="tel:+9100100983"
                     className="text-sm text-[#2563EB] hover:text-[#1E3A8A] font-medium transition-colors"
                   >
-                    +91 98765 43210
+                    +91 9100 100 983
                   </a>
                 </div>
                 <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
@@ -404,7 +431,7 @@ export default function ContactPage() {
                     WhatsApp Us
                   </p>
                   <a
-                    href="https://wa.me/919876543210"
+                    href="https://wa.me/919100100983"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-[#10B981] hover:text-emerald-700 font-medium transition-colors"
@@ -423,7 +450,7 @@ export default function ContactPage() {
                   a free demo class for your child today.
                 </p>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+919100100983"
                   className="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur-sm rounded-xl px-5 py-2.5 text-sm font-semibold transition-colors"
                 >
                   <Phone className="w-4 h-4" />

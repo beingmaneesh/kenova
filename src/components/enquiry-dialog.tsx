@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useState, useTransition, type FormEvent, type ReactNode } from "react";
+import { submitEnquiry } from "@/app/actions/enquiry";
 import {
   Dialog,
   DialogContent,
@@ -34,6 +35,8 @@ export function EnquiryDialog({
 }: EnquiryDialogProps) {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+  const [isPending, startTransition] = useTransition();
   const [formData, setFormData] = useState({
     parentName: "",
     phone: "",
@@ -46,20 +49,28 @@ export function EnquiryDialog({
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
-    setFormData({
-      parentName: "",
-      phone: "",
-      email: "",
-      studentName: "",
-      class: "",
-      syllabus: "",
-      message: "",
+    setError("");
+    startTransition(async () => {
+      const result = await submitEnquiry(formData);
+      if (result.success) {
+        setSubmitted(true);
+        setFormData({
+          parentName: "",
+          phone: "",
+          email: "",
+          studentName: "",
+          class: "",
+          syllabus: "",
+          message: "",
+        });
+        setTimeout(() => {
+          setSubmitted(false);
+          setOpen(false);
+        }, 3000);
+      } else {
+        setError(result.error || "Something went wrong. Please try again.");
+      }
     });
-    setTimeout(() => {
-      setSubmitted(false);
-      setOpen(false);
-    }, 3000);
   }
 
   function handleOpenChange(nextOpen: boolean) {
@@ -250,12 +261,28 @@ export function EnquiryDialog({
                 />
               </div>
 
+              {error && (
+                <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-2.5">
+                  {error}
+                </p>
+              )}
+
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-[#F97316] to-[#EA580C] hover:from-[#EA580C] hover:to-[#DC2626] text-white rounded-xl h-11 text-sm font-semibold shadow-md shadow-orange-200 hover:shadow-lg transition-all"
+                disabled={isPending}
+                className="w-full bg-gradient-to-r from-[#F97316] to-[#EA580C] hover:from-[#EA580C] hover:to-[#DC2626] text-white rounded-xl h-11 text-sm font-semibold shadow-md shadow-orange-200 hover:shadow-lg transition-all disabled:opacity-60"
               >
-                <Send className="w-4 h-4 mr-2" />
-                Submit Enquiry
+                {isPending ? (
+                  <>
+                    <span className="w-4 h-4 mr-2 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4 mr-2" />
+                    Submit Enquiry
+                  </>
+                )}
               </Button>
 
               <p className="text-center text-xs text-[#6B7280]">

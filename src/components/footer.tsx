@@ -108,7 +108,7 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#F97316] flex-shrink-0 mt-0.5" />
                 <span className="text-sm text-gray-400">
-                  Kenova Learning Centre, Kerala, India
+                  Kenova Learning Centre  <br /> Second floor , Naduthodiyil building ,Pattambi road Edappal, Malappuram 679576
                 </span>
               </li>
               <li>
@@ -117,12 +117,12 @@ export function Footer() {
                   className="flex items-center gap-3 text-sm text-gray-400 hover:text-[#F97316] transition-colors"
                 >
                   <Phone className="w-5 h-5 text-[#F97316] flex-shrink-0" />
-                  +91 98765 43210
+                  +91 9100 100983
                 </a>
               </li>
               <li>
                 <a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/919100100983"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-sm text-gray-400 hover:text-[#10B981] transition-colors"
@@ -137,7 +137,7 @@ export function Footer() {
                   className="flex items-center gap-3 text-sm text-gray-400 hover:text-[#F97316] transition-colors"
                 >
                   <Mail className="w-5 h-5 text-[#F97316] flex-shrink-0" />
-                  info@kenovalearning.com
+                  study@kenovalearning.com
                 </a>
               </li>
             </ul>
