@@ -39,7 +39,7 @@ const curricula = [
       "English Medium",
       "Malayalam Medium",
       "NCERT-based learning",
-      "Board exam preparation",
+      "Board Exam preparation",
       "34 hrs Monthly Support",
     ],
     plans: [
