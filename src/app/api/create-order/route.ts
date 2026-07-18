@@ -17,10 +17,12 @@ const orderSchema = z.object({
   batchPreferences: z.array(z.number().int()).length(3),
 });
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID!,
-  key_secret: process.env.RAZORPAY_KEY_SECRET!,
-});
+function getRazorpay() {
+  return new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID!,
+    key_secret: process.env.RAZORPAY_KEY_SECRET!,
+  });
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -40,7 +42,7 @@ export async function POST(req: NextRequest) {
     const extraTotal = course.additionalSubjectPrice * extraCount * course.durationMonths;
     const calculatedAmount = baseTotal + extraTotal;
 
-    const razorpayOrder = await razorpay.orders.create({
+    const razorpayOrder = await getRazorpay().orders.create({
       amount: calculatedAmount,
       currency: "INR",
       receipt: `kenova_${Date.now()}`,
