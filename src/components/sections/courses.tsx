@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { EnquiryDialog } from "@/components/enquiry-dialog";
+import { EnrollmentWizard } from "@/components/enrollment-wizard";
 import {
   Blocks,
   BrainCircuit,
@@ -115,12 +115,12 @@ export function CoursesSection() {
                 <p className="mt-4 text-[#6B7280] text-sm leading-relaxed">
                   {course.description}
                 </p>
-                <EnquiryDialog title={`Enquire — ${course.title}`} subtitle={`Get details about ${course.subtitle} programme.`}>
+                <EnrollmentWizard title={`Enquire — ${course.title}`} subtitle={`Get details about ${course.subtitle} programme.`}>
                   <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#F97316] group-hover:gap-3 transition-all cursor-pointer">
-                    Learn More
+                    Enroll Now
                     <ArrowRight className="w-4 h-4" />
                   </span>
-                </EnquiryDialog>
+                </EnrollmentWizard>
               </div>
             </motion.div>
           ))}

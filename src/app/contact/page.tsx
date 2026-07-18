@@ -18,7 +18,25 @@ import {
   User,
   BookOpen,
   GraduationCap,
+  X,
 } from "lucide-react";
+
+const batchSlots = [
+  { id: "1", label: "05:45 AM – 06:45 AM", period: "Morning" },
+  { id: "2", label: "06:45 AM – 07:45 AM", period: "Morning" },
+  { id: "3", label: "05:30 PM – 06:30 PM", period: "Evening" },
+  { id: "4", label: "06:30 PM – 07:30 PM", period: "Evening" },
+  { id: "5", label: "07:30 PM – 08:30 PM", period: "Evening" },
+  { id: "6", label: "08:30 PM – 09:30 PM", period: "Evening" },
+  { id: "7", label: "09:00 PM – 10:00 PM", period: "Evening" },
+];
+
+const prefLabels = ["1st", "2nd", "3rd"] as const;
+const prefColors = [
+  "bg-[#F97316] text-white",
+  "bg-[#2563EB] text-white",
+  "bg-[#1E3A8A] text-white",
+];
 
 const contactInfo = [
   {
@@ -81,12 +99,35 @@ export default function ContactPage() {
     syllabus: "",
     message: "",
   });
+  const [batchPrefs, setBatchPrefs] = useState<string[]>([]);
+
+  function toggleBatch(id: string) {
+    setBatchPrefs((prev) => {
+      if (prev.includes(id)) return prev.filter((p) => p !== id);
+      if (prev.length >= 3) return prev;
+      return [...prev, id];
+    });
+  }
+
+  function removeBatch(id: string) {
+    setBatchPrefs((prev) => prev.filter((p) => p !== id));
+  }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (batchPrefs.length < 3) {
+      setError("Please select exactly 3 preferred batch slots.");
+      return;
+    }
     setError("");
     startTransition(async () => {
-      const result = await submitEnquiry(formData);
+      const result = await submitEnquiry({
+        ...formData,
+        batchPreferences: batchPrefs.map((id) => {
+          const slot = batchSlots.find((s) => s.id === id)!;
+          return `${slot.label} (${slot.period})`;
+        }),
+      });
       if (result.success) {
         setSubmitted(true);
         setFormData({
@@ -98,6 +139,7 @@ export default function ContactPage() {
           syllabus: "",
           message: "",
         });
+        setBatchPrefs([]);
         setTimeout(() => setSubmitted(false), 5000);
       } else {
         setError(result.error || "Something went wrong. Please try again.");
@@ -333,11 +375,92 @@ export default function ContactPage() {
                 </div>
 
                 <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="flex items-center gap-2 text-sm font-medium text-[#111827]">
+                      <Clock className="w-4 h-4 text-[#F97316]" />
+                      Preferred Batch Slots *
+                    </label>
+                    <span className="text-xs text-[#6B7280]">
+                      {batchPrefs.length}/3 selected
+                    </span>
+                  </div>
+
+                  {batchPrefs.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {batchPrefs.map((id, idx) => {
+                        const slot = batchSlots.find((s) => s.id === id)!;
+                        return (
+                          <div
+                            key={id}
+                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold ${prefColors[idx]}`}
+                          >
+                            <span className="opacity-80">{prefLabels[idx]}</span>
+                            <span>{slot.label}</span>
+                            <button
+                              type="button"
+                              onClick={() => removeBatch(id)}
+                              className="ml-0.5 opacity-70 hover:opacity-100"
+                            >
+                              <X className="w-3 h-3" />
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  <div className="space-y-2">
+                    {(["Morning", "Evening"] as const).map((period) => (
+                      <div key={period}>
+                        <p className="text-xs uppercase tracking-wider font-semibold text-[#6B7280] mb-1.5 mt-2">
+                          {period}
+                        </p>
+                        <div className="grid grid-cols-2 gap-2">
+                          {batchSlots
+                            .filter((s) => s.period === period)
+                            .map((slot) => {
+                              const prefIdx = batchPrefs.indexOf(slot.id);
+                              const isSelected = prefIdx !== -1;
+                              const isFull = batchPrefs.length >= 3 && !isSelected;
+                              return (
+                                <button
+                                  key={slot.id}
+                                  type="button"
+                                  disabled={isFull}
+                                  onClick={() => toggleBatch(slot.id)}
+                                  className={`relative flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl border text-sm font-medium transition-all ${
+                                    isSelected
+                                      ? "border-[#2563EB] bg-blue-50 text-[#1E3A8A]"
+                                      : isFull
+                                        ? "border-gray-100 bg-gray-50 text-gray-300 cursor-not-allowed"
+                                        : "border-gray-200 bg-white text-[#111827] hover:border-[#F97316] hover:bg-orange-50/50 cursor-pointer"
+                                  }`}
+                                >
+                                  <div
+                                    className={`w-5 h-5 rounded flex items-center justify-center text-[11px] font-bold shrink-0 ${
+                                      isSelected
+                                        ? prefColors[prefIdx]
+                                        : "border border-gray-300 text-transparent"
+                                    }`}
+                                  >
+                                    {isSelected ? prefIdx + 1 : "0"}
+                                  </div>
+                                  {slot.label}
+                                </button>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
                   <label className="block text-sm font-medium text-[#111827] mb-1.5">
                     Message / Enquiry
                   </label>
                   <textarea
-                    rows={4}
+                    rows={3}
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })

@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { EnquiryDialog } from "@/components/enquiry-dialog";
+import { EnrollmentWizard } from "@/components/enrollment-wizard";
+import { DemoDialog } from "@/components/demo-dialog";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -89,7 +90,7 @@ export function HeroSection() {
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <EnquiryDialog
+              <EnrollmentWizard
                 title="Admissions Open"
                 subtitle="Secure your child's seat — fill in the details below."
               >
@@ -102,8 +103,8 @@ export function HeroSection() {
                   Admissions Open
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
-              </EnquiryDialog>
-              <EnquiryDialog>
+              </EnrollmentWizard>
+              <DemoDialog>
                 <span
                   className={cn(
                     buttonVariants({ variant: "outline", size: "lg" }),
@@ -113,7 +114,7 @@ export function HeroSection() {
                   <PlayCircle className="w-5 h-5 mr-2" />
                   Book Free Demo Class
                 </span>
-              </EnquiryDialog>
+              </DemoDialog>
             </div>
 
             <div className="mt-8 flex items-center gap-6 justify-center lg:justify-start">
@@ -159,7 +160,7 @@ export function HeroSection() {
               >
                 <div className="w-70 h-40 flex items-center justify-center mb-6">
                   <Image
-                    src="/images/logo-i.png"
+                    src="/images/icon.png"
                     alt="Kenova Learning"
                     width={256}
                     height={164}

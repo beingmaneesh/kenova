@@ -3,8 +3,9 @@
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { EnquiryDialog } from "@/components/enquiry-dialog";
+import { DemoDialog } from "@/components/demo-dialog";
 import { ArrowRight, Phone, Sparkles } from "lucide-react";
+import { EnrollmentWizard } from "../enrollment-wizard";
 
 export function CTASection() {
   return (
@@ -45,17 +46,17 @@ export function CTASection() {
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <EnquiryDialog>
+             <EnrollmentWizard title={`Enroll  Now`} subtitle={`Get started with Kenova Learning today.`}>
                 <span
                   className={cn(
                     buttonVariants({ size: "lg" }),
                     "bg-white text-[#F97316] hover:bg-orange-50 rounded-2xl h-14 px-8 text-base font-semibold shadow-lg hover:shadow-xl transition-all group cursor-pointer"
                   )}
                 >
-                  Book Free Demo Class
+                   Enroll Now
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
-              </EnquiryDialog>
+              </EnrollmentWizard>
               <a
                 href="tel:+919876543210"
                 className="inline-flex shrink-0 items-center justify-center rounded-2xl border-2 border-white/30 bg-transparent text-white hover:bg-white/10 h-14 px-8 text-base font-semibold transition-all whitespace-nowrap"

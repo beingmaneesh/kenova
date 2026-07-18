@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
-import { EnquiryDialog } from "@/components/enquiry-dialog";
+import { EnrollmentWizard } from "@/components/enrollment-wizard";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -85,7 +85,7 @@ export function Navbar({ solid = false }: NavbarProps) {
           </div>
 
           <div className="hidden lg:flex items-center gap-3">
-            <EnquiryDialog title="Admissions Open" subtitle="Secure your child's seat — fill in the details below.">
+            <EnrollmentWizard title="Admissions Open" subtitle="Secure your child's seat — fill in the details below.">
               <span
                 className={cn(
                   buttonVariants({ size: "lg" }),
@@ -94,7 +94,7 @@ export function Navbar({ solid = false }: NavbarProps) {
               >
                 Admissions Open
               </span>
-            </EnquiryDialog>
+            </EnrollmentWizard>
           </div>
 
           <button
@@ -132,7 +132,7 @@ export function Navbar({ solid = false }: NavbarProps) {
                 </Link>
               ))}
               <div className="pt-4">
-                <EnquiryDialog title="Admissions Open" subtitle="Secure your child's seat — fill in the details below.">
+                <EnrollmentWizard title="Admissions Open" subtitle="Secure your child's seat — fill in the details below.">
                   <span
                     className={cn(
                       buttonVariants({ size: "lg" }),
@@ -141,7 +141,7 @@ export function Navbar({ solid = false }: NavbarProps) {
                   >
                     Admissions Open
                   </span>
-                </EnquiryDialog>
+                </EnrollmentWizard>
               </div>
             </div>
           </motion.div>

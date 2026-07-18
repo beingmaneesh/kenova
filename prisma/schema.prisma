@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Student {
+  id          Int          @id @default(autoincrement())
+  studentName String
+  class       Int
+  board       String
+  schoolName  String       @default("")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  enrollments Enrollment[]
+}
+
+model Parent {
+  id          Int          @id @default(autoincrement())
+  parentName  String
+  phone       String
+  whatsapp    String       @default("")
+  email       String       @default("")
+  createdAt   DateTime     @default(now())
+  enrollments Enrollment[]
+}
+
+model Course {
+  id                     Int          @id @default(autoincrement())
+  board                  String
+  durationMonths         Int
+  price                  Int
+  additionalSubjectPrice Int
+  enrollments            Enrollment[]
+}
+
+model BatchSlot {
+  id               Int               @id @default(autoincrement())
+  label            String
+  period           String
+  batchPreferences BatchPreference[]
+}
+
+model Enrollment {
+  id                 Int                  @id @default(autoincrement())
+  studentId          Int
+  parentId           Int
+  courseId            Int
+  additionalSubjects String               @default("")
+  calculatedAmount   Int
+  status             String               @default("Pending")
+  createdAt          DateTime             @default(now())
+  student            Student              @relation(fields: [studentId], references: [id])
+  parent             Parent               @relation(fields: [parentId], references: [id])
+  course             Course               @relation(fields: [courseId], references: [id])
+  payments           PaymentTransaction[]
+  batchPreferences   BatchPreference[]
+}
+
+model PaymentTransaction {
+  id                 Int        @id @default(autoincrement())
+  enrollmentId       Int
+  amount             Int
+  currency           String     @default("INR")
+  paymentStatus      String     @default("created")
+  razorpayOrderId    String     @unique
+  razorpayPaymentId  String?
+  razorpaySignature  String?
+  paidAt             DateTime?
+  enrollment         Enrollment @relation(fields: [enrollmentId], references: [id])
+}
+
+model BatchPreference {
+  id              Int        @id @default(autoincrement())
+  enrollmentId    Int
+  batchSlotId     Int
+  preferenceOrder Int
+  enrollment      Enrollment @relation(fields: [enrollmentId], references: [id])
+  batchSlot       BatchSlot  @relation(fields: [batchSlotId], references: [id])
+
+  @@unique([enrollmentId, batchSlotId])
+  @@unique([enrollmentId, preferenceOrder])
+}

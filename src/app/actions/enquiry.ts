@@ -10,10 +10,11 @@ interface EnquiryData {
   class: string;
   syllabus: string;
   message: string;
+  batchPreferences?: string[];
 }
 
 export async function submitEnquiry(data: EnquiryData) {
-  const { parentName, phone, email, studentName, class: studentClass, syllabus, message } = data;
+  const { parentName, phone, email, studentName, class: studentClass, syllabus, message, batchPreferences } = data;
 
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -24,6 +25,26 @@ export async function submitEnquiry(data: EnquiryData) {
       pass: process.env.SMTP_PASS,
     },
   });
+
+  const batchRows = batchPreferences?.length
+    ? `<tr>
+        <td style="padding: 12px 0; font-weight: bold; color: #374151; vertical-align: top;">Batch Preferences</td>
+        <td style="padding: 12px 0; color: #111827;">
+          <table style="border-collapse: collapse;">
+            ${batchPreferences.map((slot, i) => {
+              const colors = ["#F97316", "#2563EB", "#1E3A8A"];
+              const labels = ["1st Choice", "2nd Choice", "3rd Choice"];
+              return `<tr>
+                <td style="padding: 3px 10px 3px 0;">
+                  <span style="display: inline-block; background: ${colors[i]}; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px;">${labels[i]}</span>
+                </td>
+                <td style="padding: 3px 0; font-size: 14px;">${slot}</td>
+              </tr>`;
+            }).join("")}
+          </table>
+        </td>
+      </tr>`
+    : "";
 
   const htmlBody = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -56,6 +77,7 @@ export async function submitEnquiry(data: EnquiryData) {
             <td style="padding: 8px 0; font-weight: bold; color: #374151;">Syllabus</td>
             <td style="padding: 8px 0; color: #111827;">${syllabus === "kerala" || syllabus === "kerala-state" ? "Kerala State" : "CBSE"}</td>
           </tr>
+          ${batchRows}
           ${message ? `<tr>
             <td style="padding: 8px 0; font-weight: bold; color: #374151; vertical-align: top;">Message</td>
             <td style="padding: 8px 0; color: #111827;">${message}</td>

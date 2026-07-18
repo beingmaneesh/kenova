@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2, BookMarked, School, ArrowRight } from "lucide-react";
-import { EnquiryDialog } from "@/components/enquiry-dialog";
+import { CheckCircle2, BookMarked, School, ArrowRight, IndianRupee, Info } from "lucide-react";
+import { EnrollmentWizard } from "@/components/enrollment-wizard";
 
 const curricula = [
   {
@@ -16,10 +16,18 @@ const curricula = [
       "Malayalam Medium",
       "Latest SCERT curriculum",
       "Exam-oriented preparation",
-      "34 hrs Monthly Support"
+      "34 hrs Monthly Support",
     ],
+    plans: [
+      { duration: "3 Months", price: 499, badge: "" },
+      { duration: "6 Months", price: 399, badge: "Popular" },
+      { duration: "10 Months", price: 299, badge: "Best Value" },
+    ],
+    additionalSubjectPrice: 150,
     color: "from-[#2563EB] to-[#1E3A8A]",
     checkColor: "text-[#F97316]",
+    planAccent: "border-[#2563EB]",
+    planBadgeBg: "bg-[#2563EB]",
   },
   {
     icon: School,
@@ -32,10 +40,18 @@ const curricula = [
       "Malayalam Medium",
       "NCERT-based learning",
       "Board exam preparation",
-      "34 hrs Monthly Support"
+      "34 hrs Monthly Support",
     ],
+    plans: [
+      { duration: "3 Months", price: 799, badge: "" },
+      { duration: "6 Months", price: 699, badge: "Popular" },
+      { duration: "10 Months", price: 599, badge: "Best Value" },
+    ],
+    additionalSubjectPrice: 200,
     color: "from-[#F97316] to-[#EA580C]",
     checkColor: "text-[#2563EB]",
+    planAccent: "border-[#F97316]",
+    planBadgeBg: "bg-[#F97316]",
   },
 ];
 
@@ -100,13 +116,50 @@ export function CurriculumSection() {
                     </li>
                   ))}
                 </ul>
+
+                {/* Plans */}
+                <div className="mt-8">
+                  <h4 className="text-sm font-semibold text-[#374151] uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <IndianRupee className="w-4 h-4" />
+                    Plans & Pricing
+                  </h4>
+                  <div className="grid grid-cols-3 gap-2">
+                    {curr.plans.map((plan) => (
+                      <div
+                        key={plan.duration}
+                        className={`relative rounded-xl border-2 ${plan.badge ? curr.planAccent : "border-gray-100"} bg-gray-50/50 p-3 text-center transition-all hover:shadow-md`}
+                      >
+                        {plan.badge && (
+                          <span className={`absolute -top-2.5 left-1/2 -translate-x-1/2 ${curr.planBadgeBg} text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap`}>
+                            {plan.badge}
+                          </span>
+                        )}
+                        <p className="text-[11px] font-medium text-[#6B7280] mt-1">{plan.duration}</p>
+                        <p className="text-xl font-bold text-[#111827] leading-tight mt-1">
+                          ₹{plan.price}
+                        </p>
+                        <p className="text-[10px] text-[#9CA3AF]">/mo per subject</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Additional subject note */}
+                  <div className="mt-3 flex items-start gap-2 bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
+                    <Info className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <p className="text-xs text-amber-700 leading-relaxed">
+                      <span className="font-semibold">Additional subjects</span> (Social Science, Malayalam, Hindi) can be added at{" "}
+                      <span className="font-bold text-amber-900">₹{curr.additionalSubjectPrice}/mo</span> per subject during enrollment.
+                    </p>
+                  </div>
+                </div>
+
                 <div className="mt-6">
-                  <EnquiryDialog title={`Enquire — ${curr.title}`} subtitle={`Learn more about our ${curr.title} programme.`}>
+                  <EnrollmentWizard title={`Enroll — ${curr.title}`} subtitle={`Learn more about our ${curr.title} programme.`}>
                     <span className={`inline-flex items-center gap-2 text-sm font-semibold ${i === 0 ? 'text-[#2563EB]' : 'text-[#F97316]'} hover:gap-3 transition-all cursor-pointer`}>
-                      Enquire Now
+                       Enroll Now
                       <ArrowRight className="w-4 h-4" />
                     </span>
-                  </EnquiryDialog>
+                  </EnrollmentWizard>
                 </div>
               </div>
             </motion.div>
