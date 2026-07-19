@@ -135,10 +135,10 @@ export function EnrollmentWizard({
       fetch("/api/courses")
         .then((r) => r.json())
         .then((data) => {
-          setCourses(data.courses);
-          setBatchSlots(data.batchSlots);
+          if (data.courses) setCourses(data.courses);
+          if (data.batchSlots) setBatchSlots(data.batchSlots);
         })
-        .catch(() => {});
+        .catch((err) => console.error("Failed to load courses:", err));
     }
   }, [open, courses.length]);
 

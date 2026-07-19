@@ -4,13 +4,16 @@ import { prisma } from "@/lib/db";
 export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const courses = await prisma.course.findMany({
-    orderBy: [{ board: "asc" }, { durationMonths: "asc" }],
-  });
-
-  const batchSlots = await prisma.batchSlot.findMany({
-    orderBy: { id: "asc" },
-  });
-
-  return NextResponse.json({ courses, batchSlots });
+  try {
+    const [courses, batchSlots] = await Promise.all([
+      prisma.course.findMany(),
+      prisma.batchSlot.findMany(),
+    ]);
+    return NextResponse.json({ courses, batchSlots });
+  } catch (err) {
+    console.error("Courses API error:", err);
+    return NextResponse.json({
+      error: err instanceof Error ? err.message : "Unknown",
+    }, { status: 500 });
+  }
 }

@@ -1,10 +1,13 @@
 import { PrismaClient } from "@prisma/client";
+import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 function getPrisma() {
   if (!globalForPrisma.prisma) {
-    globalForPrisma.prisma = new PrismaClient();
+    const url = process.env.DATABASE_URL || "mysql://root@127.0.0.1:3306/kenova_db";
+    const adapter = new PrismaMariaDb(url);
+    globalForPrisma.prisma = new PrismaClient({ adapter });
   }
   return globalForPrisma.prisma;
 }
