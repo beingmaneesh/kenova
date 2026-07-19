@@ -4,6 +4,6 @@ import { defineConfig } from "prisma/config";
 export default defineConfig({
   schema: path.join(__dirname, "prisma", "schema.prisma"),
   datasource: {
-    url: process.env.DATABASE_URL || `file:${path.join(__dirname, "dev.db")}`,
+    url: process.env.DATABASE_URL || "mysql://kenova_user:password@localhost:3306/kenova_db",
   },
 });
