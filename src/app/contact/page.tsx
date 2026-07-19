@@ -49,8 +49,8 @@ const contactInfo = [
   {
     icon: Phone,
     title: "Call Us",
-    lines: ["+91 9100100983"],
-    href: "tel:+919100100983",
+    lines: ["+91 94950 00086"],
+    href: "tel:+919495000086",
     color: "text-[#2563EB]",
     bg: "bg-blue-50",
   },
@@ -65,8 +65,8 @@ const contactInfo = [
   {
     icon: MessageCircle,
     title: "WhatsApp",
-    lines: ["+91 9100100983", "Quick replies guaranteed"],
-    href: "https://wa.me/919100100983",
+    lines: ["+91 94950 00086", "Quick replies guaranteed"],
+    href: "https://wa.me/919495000086",
     color: "text-[#10B981]",
     bg: "bg-emerald-50",
   },
@@ -378,7 +378,7 @@ export default function ContactPage() {
                   <div className="flex items-center justify-between mb-2">
                     <label className="flex items-center gap-2 text-sm font-medium text-[#111827]">
                       <Clock className="w-4 h-4 text-[#F97316]" />
-                      Preferred Batch Slots *
+                      Preferred Batch Slots * (Select 3 Slots)
                     </label>
                     <span className="text-xs text-[#6B7280]">
                       {batchPrefs.length}/3 selected
@@ -540,10 +540,10 @@ export default function ContactPage() {
                     Call for Enquiry
                   </p>
                   <a
-                    href="tel:+9100100983"
+                    href="tel:+919495000086"
                     className="text-sm text-[#2563EB] hover:text-[#1E3A8A] font-medium transition-colors"
                   >
-                    +91 9100 100 983
+                    +91 94950 00086
                   </a>
                 </div>
                 <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
@@ -554,7 +554,7 @@ export default function ContactPage() {
                     WhatsApp Us
                   </p>
                   <a
-                    href="https://wa.me/919100100983"
+                    href="https://wa.me/919495000086"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-[#10B981] hover:text-emerald-700 font-medium transition-colors"
@@ -573,7 +573,7 @@ export default function ContactPage() {
                   a free demo class for your child today.
                 </p>
                 <a
-                  href="tel:+919100100983"
+                  href="tel:+919495000086"
                   className="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur-sm rounded-xl px-5 py-2.5 text-sm font-semibold transition-colors"
                 >
                   <Phone className="w-4 h-4" />

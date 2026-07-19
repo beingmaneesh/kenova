@@ -78,7 +78,7 @@ function SuccessContent() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
-                href="https://wa.me/919100100983"
+                href="https://wa.me/919495000086"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 border-2 border-[#1E3A8A] text-[#1E3A8A] rounded-xl h-12 px-6 text-sm font-semibold hover:bg-blue-50 transition-all"
@@ -89,11 +89,11 @@ function SuccessContent() {
 
             <div className="flex items-center justify-center gap-6 text-sm text-[#6B7280]">
               <a
-                href="tel:+919100100983"
+                href="tel:+919495000086"
                 className="inline-flex items-center gap-1.5 hover:text-[#2563EB] transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                +91 9100 100 983
+                +91 94950 00086
               </a>
               <a
                 href="mailto:study@kenovalearning.com"

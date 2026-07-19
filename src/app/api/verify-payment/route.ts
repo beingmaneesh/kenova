@@ -206,7 +206,7 @@ async function sendEmails(enrollment: any) {
         ${detailsTable}
         <div style="background:#EFF6FF;border-radius:8px;padding:16px;margin-top:20px;">
           <p style="color:#1E3A8A;font-weight:600;margin:0 0 8px;">What's Next?</p>
-          <p style="color:#374151;font-size:13px;margin:0;line-height:1.5;">We'll contact you within 24 hours to confirm your batch timing and share further details. If you have any questions, feel free to reach us at <a href="tel:+919100100983" style="color:#2563EB;">+91 9100 100 983</a> or <a href="mailto:study@kenovalearning.com" style="color:#2563EB;">study@kenovalearning.com</a>.</p>
+          <p style="color:#374151;font-size:13px;margin:0;line-height:1.5;">We'll contact you within 24 hours to confirm your batch timing and share further details. If you have any questions, feel free to reach us at <a href="tel:+919495000086" style="color:#2563EB;">+91 94950 00086</a> or <a href="mailto:study@kenovalearning.com" style="color:#2563EB;">study@kenovalearning.com</a>.</p>
         </div>
       </div>
       <p style="text-align:center;color:#9ca3af;font-size:12px;margin-top:16px;">Kenova Learning — Learn Today, Lead Tomorrow.</p>

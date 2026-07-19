@@ -128,7 +128,7 @@ export function EnquiryDialog({
       <DialogTrigger render={<button type="button" />} onClick={() => setOpen(true)} className="appearance-none bg-transparent border-0 p-0 m-0 cursor-pointer inline-flex">
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto !p-0 !gap-0 rounded-2xl !ring-0 shadow-2xl" showCloseButton={false}>
+      <DialogContent className="!w-[calc(100%-1.5rem)] sm:!max-w-lg max-h-[90vh] overflow-y-auto overflow-x-hidden !p-0 !gap-0 rounded-2xl !ring-0 shadow-2xl" showCloseButton={false}>
         <div className="bg-gradient-to-r from-[#1E3A8A] to-[#2563EB] p-6 rounded-t-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-[#F97316]/15 rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
@@ -300,7 +300,7 @@ export function EnquiryDialog({
                 <div className="flex items-center justify-between mb-2">
                   <label className="flex items-center gap-1.5 text-xs font-medium text-[#111827]">
                     <Clock className="w-3.5 h-3.5 text-[#F97316]" />
-                    Preferred Batch Slots *
+                    Preferred Batch Slots * (Select 3 Slots)
                   </label>
                   <span className="text-[11px] text-[#6B7280]">
                     {batchPrefs.length}/3 selected

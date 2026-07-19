@@ -58,7 +58,7 @@ export function CTASection() {
                 </span>
               </EnrollmentWizard>
               <a
-                href="tel:+919876543210"
+                href="tel:+919495000086"
                 className="inline-flex shrink-0 items-center justify-center rounded-2xl border-2 border-white/30 bg-transparent text-white hover:bg-white/10 h-14 px-8 text-base font-semibold transition-all whitespace-nowrap"
               >
                 <Phone className="w-5 h-5 mr-2" />

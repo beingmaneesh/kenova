@@ -113,16 +113,16 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+919495000086"
                   className="flex items-center gap-3 text-sm text-gray-400 hover:text-[#F97316] transition-colors"
                 >
                   <Phone className="w-5 h-5 text-[#F97316] flex-shrink-0" />
-                  +91 9100 100983
+                  +91 94950 00086
                 </a>
               </li>
               <li>
                 <a
-                  href="https://wa.me/919100100983"
+                  href="https://wa.me/919495000086"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-sm text-gray-400 hover:text-[#10B981] transition-colors"

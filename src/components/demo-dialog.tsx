@@ -134,7 +134,7 @@ export function DemoDialog({
       >
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-xl max-h-[90vh] overflow-y-auto !p-0 !gap-0 rounded-2xl !ring-0 shadow-2xl" showCloseButton={false}>
+      <DialogContent className="!w-[calc(100%-1.5rem)] sm:!max-w-xl max-h-[90vh] overflow-y-auto overflow-x-hidden !p-0 !gap-0 rounded-2xl !ring-0 shadow-2xl" showCloseButton={false}>
         {/* Header */}
         <div className="bg-gradient-to-r from-[#1E3A8A] to-[#2563EB] p-5 rounded-t-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-[#F97316]/15 rounded-full -translate-y-1/2 translate-x-1/2" />
@@ -337,7 +337,7 @@ export function DemoDialog({
                 <div className="flex items-center justify-between mb-2">
                   <label className="flex items-center gap-1.5 text-xs font-semibold text-[#111827]">
                     <Clock className="w-3.5 h-3.5 text-[#F97316]" />
-                    Preferred Batch Slots *
+                    Preferred Batch Slots * (Select 3 Slots)
                   </label>
                   <span className="text-[11px] text-[#6B7280]">
                     {batchPrefs.length}/3 selected

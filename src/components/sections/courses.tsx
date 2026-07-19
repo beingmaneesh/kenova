@@ -60,6 +60,8 @@ const subjects = [
   { icon: BookOpen, name: "English", color: "text-[#1E3A8A]", bg: "bg-indigo-50", hoverBg: "group-hover:bg-[#1E3A8A]" },
   { icon: Languages, name: "Malayalam", color: "text-[#EA580C]", bg: "bg-orange-50", hoverBg: "group-hover:bg-[#EA580C]" },
   { icon: Globe, name: "Social Science", color: "text-[#2563EB]", bg: "bg-blue-50", hoverBg: "group-hover:bg-[#2563EB]" },
+  { icon: Languages, name: "Hindi", color: "text-[#EA580C]", bg: "bg-orange-50", hoverBg: "group-hover:bg-[#EA580C]" },
+  { icon: Languages, name: "Arabic", color: "text-[#2563EB]", bg: "bg-blue-50", hoverBg: "group-hover:bg-[#2563EB]" },
 ];
 
 export function CoursesSection() {
@@ -136,7 +138,7 @@ export function CoursesSection() {
           <h3 className="font-heading text-xl font-bold text-[#111827] text-center mb-8">
             Subjects We Teach
           </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4">
             {subjects.map((subject, i) => (
               <motion.div
                 key={subject.name}
