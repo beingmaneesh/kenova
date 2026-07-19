@@ -4,6 +4,8 @@ import { z } from "zod/v4";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 
+export const dynamic = "force-dynamic";
+
 const verifySchema = z.object({
   razorpay_order_id: z.string(),
   razorpay_payment_id: z.string(),

@@ -3,6 +3,8 @@ import { prisma } from "@/lib/db";
 import Razorpay from "razorpay";
 import { z } from "zod/v4";
 
+export const dynamic = "force-dynamic";
+
 const orderSchema = z.object({
   parentName: z.string().min(1),
   phone: z.string().min(10),
